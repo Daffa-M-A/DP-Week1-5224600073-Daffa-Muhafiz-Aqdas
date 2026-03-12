@@ -1,0 +1,9 @@
+# DP-Week1-5224600073-Daffa-Muhafiz-Aqdas
+
+1. Struktur invariant dalam program saya adalah core game loop yang terdapat di dalam class RunSession . Class ini mendefinisikan urutan fase untuk tiga ronde: generate input, compute base score, compute reward, update money, dan shop phase . Urutan struktural ini bersifat invariant dan menjamin bahwa alur permainan tetap konsisten tanpa terpengaruh oleh perubahan mekanik apa pun.
+
+2. Bagian yang mutable adalah implementasi dari mekanik permainan yang berinteraksi dengan core loop melalui interface yang telah ditentukan (interface.h). Ini mencakup bagaimana input dibuat (SmartPokerInputGenerator dan RandomPokerInputGenerator), bagaimana skor dasar dihitung (PokerScoringRule), bagaimana reward uang dibagikan (PlusTwoRewardRule), serta logika penawaran di dalam ShopSystem . Komponen-komponen ini dapat ditukar atau dimodifikasi secara dinamis dengan aman tanpa merusak struktur utamanya.
+
+3. Ketika InputGenerator diganti, RunSession tidak perlu diubah karena ia murni bergantung pada abstraksi (interface IInputGenerator), bukan pada implementasinya . Dengan memanfaatkan metode Proxy/Wrapper, Shop dapat langsung menukar strategi internal dari mekanik poker menjadi mekanik acak (random). RunSession hanya bertugas memanggil fungsi Generate(), sama sekali tidak menyadari adanya pergeseran perilaku di balik layar tersebut.
+
+4. Jika logika penilaian (scoring logic) ditempatkan langsung di dalam RunSession, hal itu akan melanggar aturan struktur invarian. Setiap perubahan di masa depan terkait cara skor dihitung—seperti menambahkan evaluasi combo kartu poker atau multiplier akan memaksa kita untuk memodifikasi core loop itu sendiri. Ini secara drastis meningkatkan risiko rusaknya urutan fase yang sudah baku, serta menciptakan arsitektur program yang rapuh untuk dimodifikasi dikemudian hari.
