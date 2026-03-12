@@ -39,3 +39,8 @@
 
 # debug information files
 *.dwo
+.vs/DP Week 1 Build.slnx/FileContentIndex/1cf19003-80ef-4194-802e-a77473731d3d.vsidx
+.vs/DP Week 1 Build.slnx/v18/Browse.VC.db
+.vs/DP Week 1 Build.slnx/v18/ipch/AutoPCH/15743a32f826d05c/SHOPSYSTEM.ipch
+/.vs
+/.vscode
